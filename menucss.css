@@ -6,17 +6,7 @@
     display: block;
 }
 
-/* Disable Desktop Menu Everywhere */
-.desktop-nav {
-    display: none !important;
-}
-/* Enable Mobile Menu Everywhere */
-.mobile-controls {
-    display: flex !important;
-}
-.mobile-nav {
-    width: 350px; /* Only if you want bigger menu on laptop */
-}
+
 /* Each row — One line only */
 .row{
   display:flex;
@@ -930,13 +920,9 @@ main {
 /* Responsive Design - Mobile First */
 /* Mobile View (max-width: 1100px) */
 @media (max-width: 1100px) {
-    .desktop-nav {
-        display: none;
-    }
+
     
-    .mobile-controls {
-        display: flex;
-    }
+
     
     .header-container {
         display: flex;
@@ -983,18 +969,13 @@ main {
         text-overflow: ellipsis;
     }
     
-    .mobile-controls {
-        flex: 0 0 auto;
-        margin-left: auto;
-    }
+    
     
     .container {
         width: 95%;
     }
     
-    .mobile-nav {
-        width: 280px;
-    }
+    
     
     .footer-content {
         grid-template-columns: 1fr;
