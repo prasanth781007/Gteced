@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Gallery Slider</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+}
+
+/* Slider Container */
+.slider {
+  position: relative;
+  max-width: 100%;
+  height: 70vh;
+  overflow: hidden;
+}
+
+/* Slide Images */
+.slide {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Description Box */
+.caption {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+/* Navigation Buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 12px;
+  color: #fff;
+  font-size: 22px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+/* Dots */
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 4px;
+  background: #777;
+  display: inline-block;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.active {
+  background: #fff;
+}
+.slider {
+  position: relative;
+  max-width: 100%;
+  height: 70vh;
+  overflow: hidden;
+    
+
+  margin: 25px ; /* Added space around slider */
+  border: 6px solid #FFD200; /* Gold border */
+  border-radius: 15px;
+
+  /* Glow Effect */
+  box-shadow: 0 0 25px rgba(255, 210, 0, 0.7);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Glow Enhancement on Hover */
+.slider:hover {
+  box-shadow: 0 0 40px rgba(255, 210, 0, 1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="slider">
+
+  <div class="slide">
+    <img src="Screenshot_2025_1111_214658.jpg" alt="">
+    <div class="caption">A vibrant campus with modern facilities</div>
+  </div>
+
+  <div class="slide">
+    <img src="Screenshot_2025_1111_214658.jpg" alt="">
+    <div class="caption">Advanced computer labs for the future innovators</div>
+  </div>
+
+  <div class="slide">
+    <img src="https://via.placeholder.com/1200x700?text=Library" alt="">
+    <div class="caption">A peaceful library for smart learning</div>
+  </div>
+
+  <span class="prev" onclick="changeSlide(-1)">&#10094;</span>
+  <span class="next" onclick="changeSlide(1)">&#10095;</span>
+
+</div>
+
+<div class="dots">
+  <span class="dot" onclick="currentSlide(0)"></span>
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+</div>
+
+<script>
+let slideIndex = 0;
+showSlide(slideIndex);
+
+// Next/Prev controls
+function changeSlide(n) {
+  slideIndex += n;
+  showSlide(slideIndex);
+  resetAutoSlide();
+}
+
+// Dot controls
+function currentSlide(n) {
+  slideIndex = n;
+  showSlide(slideIndex);
+  resetAutoSlide();
+}
+
+function showSlide(n) {
+  let slides = document.getElementsByClassName("slide");
+  let dots = document.getElementsByClassName("dot");
+
+  if (n >= slides.length) slideIndex = 0;
+  if (n < 0) slideIndex = slides.length - 1;
+
+  for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+  for (let i = 0; i < dots.length; i++) dots[i].classList.remove("active");
+
+  slides[slideIndex].style.display = "block";
+  dots[slideIndex].classList.add("active");
+}
+
+// Auto Slide every 4 seconds
+let autoSlide = setInterval(() => {
+  changeSlide(1);
+}, 4000);
+
+function resetAutoSlide() {
+  clearInterval(autoSlide);
+  autoSlide = setInterval(() => {
+    changeSlide(1);
+  }, 4000);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - GTEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1a365d;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #1a365d, #2c5282);
+            border-radius: 2px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid #2c5282;
+            color: #2c5282;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #2c5282;
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .gallery-category {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .gallery-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c5282;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-icon {
+            opacity: 1;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        .lightbox-close, .lightbox-prev, .lightbox-next {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .lightbox-close {
+            top: 20px;
+            right: 20px;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-next {
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Video Gallery */
+        .video-gallery {
+            margin-top: 60px;
+        }
+
+        .video-gallery h2 {
+            text-align: center;
+            color: #1a365d;
+            margin-bottom: 30px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .video-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(44, 82, 130, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .video-play:hover {
+            background: rgba(44, 82, 130, 1);
+        }
+
+        .video-info {
+            padding: 15px;
+            background: white;
+        }
+
+        .video-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2d3748;
+        }
+
+        .video-duration {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        /* Stats Section */
+        .gallery-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 60px 0;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #4a5568;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-controls {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            .lightbox-prev, .lightbox-next {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <h1 class="page-title">GTEC Gallery</h1>
+        <p class="page-subtitle">Explore the vibrant campus life, academic excellence, and memorable moments at Ganadipathy Tulsi's Jain Engineering College through our photo and video collections.</p>
+        
+        <div class="gallery-controls">
+            <button class="filter-btn active" data-filter="all">All Photos</button>
+            <button class="filter-btn" data-filter="campus">Campus</button>
+            <button class="filter-btn" data-filter="events">Events</button>
+            <button class="filter-btn" data-filter="academics">Academics</button>
+            <button class="filter-btn" data-filter="sports">Sports</button>
+            <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+        </div>
+        
+        <div class="gallery-stats">
+            <div class="stat-item">
+                <div class="stat-number">1500+</div>
+                <div class="stat-label">Photos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Videos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2025</div>
+                <div class="stat-label">Current Year</div>
+            </div>
+        </div>
+        
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Campus Images -->
+            <div class="gallery-item" data-category="campus">
+                <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="GTEC Main Building" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Main Building</div>
+                    <div class="gallery-category">Campus</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="campus">
+                <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Campus Garden" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Campus Garden</div>
+                    <div class="gallery-category">Campus</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <!-- Events Images -->
+            <div class="gallery-item" data-category="events">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Annual Day Celebration" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Annual Day 2024</div>
+                    <div class="gallery-category">Events</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Tech Fest" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Tech Fest 2024</div>
+                    <div class="gallery-category">Events</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <!-- Academics Images -->
+            <div class="gallery-item" data-category="academics">
+                <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Computer Lab" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Advanced Computer Lab</div>
+                    <div class="gallery-category">Academics</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="academics">
+                <img src="https://images.unsplash.com/photo-1581726707445-75cbe4efc586?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Library" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Central Library</div>
+                    <div class="gallery-category">Academics</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <!-- Sports Images -->
+            <div class="gallery-item" data-category="sports">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Cricket Match" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Inter-College Cricket</div>
+                    <div class="gallery-category">Sports</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="sports">
+                <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Basketball Tournament" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Basketball Tournament</div>
+                    <div class="gallery-category">Sports</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <!-- Infrastructure Images -->
+            <div class="gallery-item" data-category="infrastructure">
+                <img src="https://images.unsplash.com/photo-1568992688065-536aad8a12f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Auditorium" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Main Auditorium</div>
+                    <div class="gallery-category">Infrastructure</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="infrastructure">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Robotics Lab" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Robotics Laboratory</div>
+                    <div class="gallery-category">Infrastructure</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <!-- More Images -->
+            <div class="gallery-item" data-category="events">
+                <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Cultural Fest" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Cultural Fest 2024</div>
+                    <div class="gallery-category">Events</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="academics">
+                <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Research Lab" class="gallery-img">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Research Laboratory</div>
+                    <div class="gallery-category">Academics</div>
+                </div>
+                <div class="gallery-icon">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-gallery">
+            <h2>Campus Videos</h2>
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Campus Tour">
+                        <div class="video-play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Virtual Campus Tour 2024</div>
+                        <div class="video-duration">5:24</div>
+                    </div>
+                </div>
+                
+                <div class="video-item">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com

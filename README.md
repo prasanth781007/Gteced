@@ -1,1 +1,1 @@
-# Gteced
+# Gtec

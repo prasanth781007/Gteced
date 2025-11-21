@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Opportunities - Join Our Team</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="menucss.css">
+
+  
+    <style>
+    
+        /* common.css - Fixed Mobile View Layout */
+        :root {
+            --gold: #D4AF37;
+            --navy: #13274F;
+            --burgundy: #800020;
+            --cream: #F8F4E9;
+            --charcoal: #2A2A2A;
+            --light-gold: #F6E8B1;
+            --dark-navy: #0A1A2F;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .application-hero {
+            position: relative;
+            background: linear-gradient(
+                rgba(19, 39, 79, 0.85),
+                rgba(19, 39, 79, 0.92)
+            );
+            text-align: center;
+            padding: 150px 0 80px;
+            color: white;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* Fullscreen Background Image (behind gradient) */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Foreground Content */
+        .application-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .application-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--light-gold);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .application-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .application-badge {
+            display: inline-block;
+            background: var(--burgundy);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(128, 0, 32, 0.4);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--navy);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--burgundy));
+            border-radius: 2px;
+        }
+
+        .content-section {
+            margin-bottom: 80px;
+            padding: 50px 40px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--gold), var(--burgundy));
+        }
+
+        .content-section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .content-section h3 {
+            color: var(--burgundy);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Career Positions Styles */
+        .positions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .position-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        .position-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .position-header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--dark-navy) 100%);
+            color: white;
+            padding: 20px;
+        }
+
+        .position-header h3 {
+            color: var(--light-gold);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .position-type {
+            display: inline-block;
+            background: var(--burgundy);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .position-body {
+            padding: 25px;
+        }
+
+        .position-body ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        .position-body li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .position-body li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .position-requirements {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .position-requirements h4 {
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--burgundy) 0%, #600018 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            text-align: center;
+            width: 100%;
+            border: none;
+            
+        }
+
+        
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--dark-navy) 100%);
+            color: white;
+            padding: 60px 0;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .contact-section h3 {
+            color: var(--light-gold);
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--burgundy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .application-hero {
+                padding: 120px 0 70px;
+            }
+            .application-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .application-hero {
+                padding: 100px 0 60px;
+            }
+            .application-hero h1 {
+                font-size: 1.8rem;
+            }
+            .application-hero p {
+                font-size: 1rem;
+            }
+            .positions-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-section {
+                padding: 30px 20px;
+            }
+            .position-body {
+                padding: 20px;
+            }
+        }
+    button a {
+  text-decoration: none;
+        color:gold;
+}
+    </style>
+</head>
+<body>
+  <div id="header"></div>
+    <br><br>
+    <!-- Hero Section -->
+    <section class="application-hero">
+        <div class="application-hero-content">
+                   
+            <h1>Career Opportunities</h1>
+            <p>Join our prestigious institution and shape the future of education</p>
+            <div class="application-badge">Now Hiring</div>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <!-- Positions Section -->
+            <section class="content-section">
+                <div class="section-title">
+                    <h2>Available Positions</h2>
+                </div>
+                
+                <div class="positions-grid">
+                    <!-- Professor Card -->
+                    <div class="position-card">
+                        <div class="position-header">
+                            <h3>Professor</h3>
+                            <span class="position-type">Full-time</span>
+                        </div>
+                        <div class="position-body">
+                            <h4>Departments:</h4>
+                            <ul>
+                                <li>Computer Science and Engineering</li>
+                                <li>Electronics and Communication Engineering</li>
+                                <li>Electrical and Electronics Engineering</li>
+                                <li>Mechanical Engineering</li>
+                                <li>Information Technology</li>
+                                <li>Master of Computer Applications</li>
+                                <li>Master of Business Administration</li>
+                            </ul>
+                            
+                            <div class="position-requirements">
+                                <h4>Eligibility:</h4>
+                                <p>Ph.D with 10 years experience in Teaching / Industry / Research.</p>
+                            </div>
+                            
+                            <a href="applystaff.html" class="apply-btn">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Associate Professor Card -->
+                    <div class="position-card">
+                        <div class="position-header">
+                            <h3>Associate Professor</h3>
+                            <span class="position-type">Full-time</span>
+                        </div>
+                        <div class="position-body">
+                            <h4>Departments:</h4>
+                            <ul>
+                                <li>Computer Science and Engineering</li>
+                                <li>Electronics and Communication Engineering</li>
+                                <li>Electrical and Electronics Engineering</li>
+                                <li>Mechanical Engineering</li>
+                                <li>Information Technology</li>
+                                <li>Master of Computer Applications</li>
+                                <li>Master of Business Administration</li>
+                            </ul>
+                            
+                            <div class="position-requirements">
+                                <h4>Eligibility:</h4>
+                                <p>Ph.D or M.E. or MCA or MBA with 7 years experience in Teaching / Industry / Research.</p>
+                            </div>
+                            
+                                                        <a href="applystaff.html"><button class="apply-btn">Apply Now</button></a>
+                                         </div>
+                    </div>
+                    
+                    <!-- Assistant Professor Card -->
+                    <div class="position-card">
+                        <div class="position-header">
+                            <h3>Assistant Professor</h3>
+                            <span class="position-type">Full-time</span>
+                        </div>
+                        <div class="position-body">
+                            <h4>Departments:</h4>
+                            <ul>
+                                <li>Computer Science and Engineering</li>
+                                <li>Electronics and Communication Engineering</li>
+                                <li>Electrical and Electronics Engineering</li>
+                                <li>Mechanical Engineering</li>
+                                <li>Information Technology</li>
+                                <li>Master of Computer Applications</li>
+                                <li>Master of Business Administration</li>
+                            </ul>
+                            
+                            <div class="position-requirements">
+                                <h4>Eligibility:</h4>
+                                <p>M.E. / M.Tech. / MCA / MBA in relevant discipline.</p>
+                            </div>
+                            
+<a href="applystaff.html"><button class="apply-btn">Apply Now</button></a>
+                       </div>
+                    </div>
+                </div>
+                
+                <div class="position-requirements" style="margin-top: 40px;">
+                    <h4>Additional Information:</h4>
+                    <p>Salary as per AICTE norms. Higher salary will be considered, commensurate with qualifications and experience.</p>
+                </div>
+            </section>
+            
+            <!-- Specializations Section -->
+            <section class="content-section">
+                <div class="section-title">
+                    <h2>Specializations</h2>
+                </div>
+                
+                <div class="specializations-grid">
+                    <div class="specialization-card">
+                        <h3>Electronics and Communication Engineering</h3>
+                        <ul>
+                            <li>Embedded Systems</li>
+                            <li>VLSI Design</li>
+                            <li>Communications / Networking</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact Section -->
+            <section class="contact-section">
+                <div class="container">
+                    <h3>Contact Us</h3>
+                    <p>For more information about these positions or to submit your application, please contact:</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i>✉️</i>
+                            </div>
+                            <div>
+                                <strong>Email:</strong> principal@gtec.ac.in
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+   
+<script src="menujs.js"></script>
+
+  
+</body>
+</html>

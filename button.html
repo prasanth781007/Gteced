@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Club Buttons</title>
+<style>
+
+
+/* Each row — One line only */
+.row{
+  display:flex;
+  flex-wrap:nowrap; /* ❌ No wrapping */
+  justify-content:center;
+  gap:12px;
+  margin-right:10px;
+  margin-left:10px;
+  margin-bottom:12px;
+  
+  overflow-x:auto; /* 👉 Mobile scroll */
+  padding-bottom:8px;
+}
+
+/* Button style */
+.btn1{
+  flex: 0 0 00px; /* Fixed width */
+  text-align:center;
+  padding:15px 20px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  white-space:nowrap;
+  transition:0.2s;
+}
+
+/* Club Colors */
+.blooddonation{ background:#e11d48; }
+.blooddonation:hover{ background:#be123c; }
+
+.nss{ background:#0284c7; }
+.nss:hover{ background:#0369a1; }
+
+.redribbon{ background:#f97316; }
+.redribbon:hover{ background:#ea580c; }
+
+.rotaract{ background:#7c3aed; }
+.rotaract:hover{ background:#6d28d9; }
+  .marginbutton{margin-top:150px;
+.yrc{ background:#10b981; }
+.yrc:hover{ background:#059669; }
+  @media (min-width: 500px) {
+  .marginbutton{margin-top:110px; display:flex;}
+    
+  }
+</style>
+</head>
+<body>
+  <div class="marginbutton">
+  <!-- First Row: 3 Buttons -->
+  <div class="row">
+    <a href="blooddonation.html"> <button class="btn1 blooddonation">Blood Donation</button></a>
+    <a href="NSS.html"><button class="btn1 nss">NSS</button></a>
+    <a href="redribbon.html"><button class="btn1 redribbon">RR Club</button></a>
+  </div>
+
+  <!-- Second Row: 2 Buttons -->
+  <div class="row">
+   <a href="ROTARACTCLUB.html"> <button class="btn1 rotaract">Rotaract Club</button></a>
+   <a href="youthredcross.html"> <button class="btn1 yrc">Youth Red Cross</button></a>
+  </div>
+  </div>
+
+
+</body>
+</html>

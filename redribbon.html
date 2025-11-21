@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Ribbon Club - GTEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="menucss.css">
+ <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .rrc-container {
+            max-width: 1200px;
+            margin: 0px auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #c62828, #d32f2f);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M50,5 L60,40 L95,40 L65,60 L75,95 L50,75 L25,95 L35,60 L5,40 L40,40 Z" fill="white"/></svg>');
+            background-size: 100px;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .rrc-logo {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .content-section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            color: #c62828;
+            border-bottom: 2px solid #c62828;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: #ffebee;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #d32f2f;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: #c62828;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mission-section {
+            background: #ffebee;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            position: relative;
+            border-left: 4px solid #c62828;
+        }
+
+        .event-section {
+            background: #fff;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #c62828;
+        }
+
+        .event-title {
+            color: #c62828;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .event-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .event-info {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .event-highlights {
+            flex: 1;
+            min-width: 250px;
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .highlight-icon {
+            color: #c62828;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 30px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .slideshow {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(198, 40, 40, 0.8);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .slideshow-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .slideshow-nav button {
+            background: rgba(198, 40, 40, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .slideshow-nav button:hover {
+            background: rgba(198, 40, 40, 1);
+            transform: scale(1.1);
+        }
+
+        .slideshow-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: #c62828;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            opacity: 1;
+            border-color: #c62828;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+            margin: 10px;
+            background: #ffebee;
+            border-radius: 8px;
+            min-width: 150px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #c62828;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .activities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .activity-icon {
+            color: #c62828;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .partners-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .partner-logo {
+            width: 120px;
+            height: 120px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .partner-logo i {
+            font-size: 2.5rem;
+            color: #c62828;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .slide-image {
+                height: 300px;
+            }
+            
+            .slideshow-nav button {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+      <div id="header"></div>
+  <div class="marginbutton">
+  <!-- First Row: 3 Buttons -->
+  <div class="row">
+    <a href="blooddonation.html"> <button class="btn1 blooddonation">Blood Donation</button></a>
+    <a href="NSS.html"><button class="btn1 nss">NSS</button></a>
+    <a href="redribbon.html"><button class="btn1 redribbon">RR Club</button></a>
+  </div>
+
+  <!-- Second Row: 2 Buttons -->
+  <div class="row">
+   <a href="ROTARACTCLUB.html"> <button class="btn1 rotaract">Rotaract Club</button></a>
+   <a href="youthredcross.html"> <button class="btn1 yrc">Youth Red Cross</button></a>
+  </div>
+  </div>
+    <div class="rrc-container">
+        <div class="page-header">
+            <div class="rrc-logo">
+                <i class="fas fa-ribbon"></i>
+            </div>
+            <h1>Red Ribbon Club</h1>
+            <p>Creating Awareness, Saving Lives - Together Against HIV/AIDS</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> About Red Ribbon Club</h2>
+            <p>"Red Ribbon Club" formed in association with the Red Ribbon Clubs of USA and Tamilnadu strives for the welfare of the youth. The special features include teaching of Life Skill Techniques, and to create an awareness about HIV / AIDS. Job Orientation Programmes are also conducted through this club. This club has been specially implemented by the Tamil Nadu State Aids Control Society.</p>
+            
+            <div class="mission-section">
+                <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                <p>To empower youth with knowledge and life skills to prevent HIV/AIDS, reduce stigma and discrimination, and promote healthy living through awareness programs and community engagement.</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-heartbeat"></i> Health Awareness</h3>
+                    <p>Creating comprehensive awareness about HIV/AIDS prevention, transmission, and treatment through educational programs and workshops.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Life Skills Training</h3>
+                    <p>Teaching essential life skills to help youth make informed decisions, resist peer pressure, and develop healthy relationships.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-briefcase"></i> Career Guidance</h3>
+                    <p>Conducting job orientation programs and career counseling sessions to help students prepare for their professional lives.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Events & Activities</h2>
+            
+            <div class="event-section">
+                <h3 class="event-title"><i class="fas fa-star"></i> Celebrating Life (17.04.2014)</h3>
+                <div class="event-details">
+                    <div class="event-info">
+                        <p>On behalf of our college RRC unit a programme titled "Celebrating Life" was conducted at EDUSAT Lab in our college on 17.4.14. Mr. ADISAYARUPAN, Resource person, TANSACS, Chennai, gave a special address about "AIDS awareness" to students.</p>
+                        <p>More than 100 first year students participated the programme, gaining valuable knowledge about HIV/AIDS prevention and awareness.</p>
+                    </div>
+                    <div class="event-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><i class="fas fa-users"></i></div>
+                            <div>
+                                <strong>100+ Students</strong> participated
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><i class="fas fa-calendar-day"></i></div>
+                            <div>
+                                <strong>April 17, 2014</strong> event date
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <strong>EDUSAT Lab</strong> venue
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon"><i class="fas fa-user-tie"></i></div>
+                            <div>
+                                <strong>Mr. ADISAYARUPAN</strong> resource person
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Students Reached</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Awareness Programs</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Life Skill Sessions</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-label">Job Orientation Programs</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-images"></i> RRC Photo Gallery</h2>
+            
+            <!-- Slideshow Container -->
+            <div class="slideshow-container">
+                <div class="slideshow" id="slideshow">
+                    <div class="slide">
+                        <div class="slide-image" style="background: linear-gradient(45deg, #c62828, #d32f2f); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                            <i class="fas fa-ribbon" style="font-size: 4rem; margin-right: 20px;"></i>
+                            <div>Red Ribbon Club Awareness Session</div>
+                        </div>
+                        <div class="slide-caption">Students participating in HIV/AIDS awareness program</div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-image" style="background: linear-gradient(45deg, #b71c1c, #c62828); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                            <i class="fas fa-users" style="font-size: 4rem; margin-right: 20px;"></i>
+                            <div>Celebrating Life Event</div>
+                        </div>
+                        <div class="slide-caption">"Celebrating Life" program held on April 17, 2014</div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-image" style="background: linear-gradient(45deg, #d32f2f, #f44336); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                            <i class="fas fa-chalkboard-teacher" style="font-size: 4rem; margin-right: 20px;"></i>
+                            <div>Expert Session by TANSACS</div>
+                        </div>
+                        <div class="slide-caption">Mr. ADISAYARUPAN from TANSACS addressing students</div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-image" style="background: linear-gradient(45deg, #c2185b, #e91e63); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                            <i class="fas fa-hand-holding-heart" style="font-size: 4rem; margin-right: 20px;"></i>
+                            <div>Life Skills Training</div>
+                        </div>
+                        <div class="slide-caption">Students learning essential life skills for healthy living</div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-image" style="background: linear-gradient(45deg, #ad1457, #c2185b); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                            <i class="fas fa-briefcase" style="font-size: 4rem; margin-right: 20px;"></i>
+                            <div>Job Orientation Program</div>
+                        </div>
+                        <div class="slide-caption">Career guidance and job orientation session for students</div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-image" style="background: linear-gradient(45deg, #880e4f, #ad1457); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                            <i class="fas fa-certificate" style="font-size: 4rem; margin-right: 20px;"></i>
+                            <div>RRC Volunteers</div>
+                        </div>
+                        <div class="slide-caption">Dedicated RRC volunteers working towards awareness creation</div>
+                    </div>
+                </div>
+                
+                <div class="slideshow-nav">
+                    <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                
+                <div class="slideshow-dots" id="dotsContainer">
+                    <!-- Dots will be generated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="thumbnail-container" id="thumbnailContainer">
+                <!-- Thumbnails will be generated by JavaScript -->
+ <!-- Thumbnails will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-tasks"></i> Key Focus Areas</h2>
+            
+            <div class="activities-list">
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fas fa-shield-virus"></i></div>
+                    <div>
+                        <h3>HIV/AIDS Prevention</h3>
+                        <p>Educating youth about transmission, prevention methods, and safe practices</p>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fas fa-brain"></i></div>
+                    <div>
+                        <h3>Life Skill Education</h3>
+                        <p>Teaching decision-making, communication, and coping skills for healthy living</p>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fas fa-handshake"></i></div>
+                    <div>
+                        <h3>Stigma Reduction</h3>
+                        <p>Working to eliminate discrimination against people living with HIV/AIDS</p>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon"><i class="fas fa-briefcase"></i></div>
+                    <div>
+                        <h3>Career Development</h3>
+                        <p>Providing job orientation and career guidance programs for students</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-handshake"></i> Our Partners</h2>
+            
+            <div class="partners-section">
+                <div class="partner-logo">
+                    <i class="fas fa-ribbon"></i>
+                    <div>Red Ribbon Club USA</div>
+                </div>
+                
+                <div class="partner-logo">
+                    <i class="fas fa-landmark"></i>
+                    <div>Tamil Nadu State AIDS Control Society</div>
+                </div>
+                
+                <div class="partner-logo">
+                    <i class="fas fa-university"></i>
+                    <div>Anna University</div>
+                </div>
+                
+                <div class="partner-logo">
+                    <i class="fas fa-hospital"></i>
+                    <div>Local Health Departments</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title"><i class="fas fa-hands-helping"></i> Get Involved</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-user-plus"></i> Become a Volunteer</h3>
+                    <p>Join our dedicated team of RRC volunteers and make a difference in your community. Help spread awareness and support those affected by HIV/AIDS.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-calendar-check"></i> Attend Events</h3>
+                    <p>Participate in our regular awareness programs, workshops, and seminars to enhance your knowledge and skills.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-bullhorn"></i> Spread Awareness</h3>
+                    <p>Help us reach more people by sharing accurate information about HIV/AIDS prevention and treatment in your social circles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script src="menujs.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slideshow = document.getElementById('slideshow');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('dotsContainer');
+            const thumbnailContainer = document.getElementById('thumbnailContainer');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            
+            // Create dots and thumbnails
+            slides.forEach((slide, index) => {
+                // Create dot
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+                
+                // Create thumbnail
+                const thumbnail = document.createElement('div');
+                thumbnail.classList.add('thumbnail');
+                if (index === 0) thumbnail.classList.add('active');
+                
+                // Extract background color from slide for thumbnail
+                const slideStyle = window.getComputedStyle(slide.querySelector('.slide-image'));
+                thumbnail.style.background = slideStyle.background;
+                thumbnail.style.display = 'flex';
+                thumbnail.style.alignItems = 'center';
+                thumbnail.style.justifyContent = 'center';
+                thumbnail.style.color = 'white';
+                thumbnail.style.fontSize = '0.7rem';
+                thumbnail.style.textAlign = 'center';
+                thumbnail.style.padding = '5px';
+                
+                // Extract icon and text from slide for thumbnail
+                const slideContent = slide.querySelector('.slide-image');
+                const icon = slideContent.querySelector('i')?.cloneNode(true);
+                const text = slideContent.textContent.trim();
+                
+                if (icon) {
+                    icon.style.fontSize = '1.2rem';
+                    icon.style.marginRight = '5px';
+                    thumbnail.appendChild(icon);
+                }
+                
+                const textNode = document.createTextNode(text.length > 15 ? text.substring(0, 15) + '...' : text);
+                thumbnail.appendChild(textNode);
+                
+                thumbnail.addEventListener('click', () => goToSlide(index));
+                thumbnailContainer.appendChild(thumbnail);
+            });
+            
+            // Function to go to specific slide
+            function goToSlide(index) {
+                currentSlide = index;
+                updateSlideshow();
+            }
+            
+            // Function to update slideshow
+            function updateSlideshow() {
+                slideshow.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update dots
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+                
+                // Update thumbnails
+                document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                    thumb.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            // Next slide
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlideshow();
+            }
+            
+            // Previous slide
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlideshow();
+            }
+            
+            // Event listeners
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+            
+            // Auto advance slides
+            let slideInterval = setInterval(nextSlide, 5000);
+            
+            // Pause on hover
+            slideshow.parentElement.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            slideshow.parentElement.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+            });
+        });
+    </script>
+</body>
+</html>

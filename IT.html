@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Department - GTEC</title>
+    <link rel="stylesheet" href="menucss.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* IT Department Specific Styles */
+        .department-hero {
+            background: linear-gradient(135deg, rgba(19, 39, 79, 0.9) 0%, rgba(10, 26, 47, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .department-hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .department-hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .department-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.9);
+            color: var(--navy);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            color: var(--navy);
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-department {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Programs Section */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--gold);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .program-card h4 {
+            color: var(--navy);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .program-card p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .program-details {
+            display: flex;
+            justify-content: space-between;
+            background: #f9f9f9;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* Faculty Section */
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .faculty-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .faculty-img {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--dark-navy) 100%);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .faculty-content {
+            padding: 25px;
+        }
+
+        .faculty-content h4 {
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .faculty-designation {
+            color: var(--burgundy);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .faculty-qualification {
+            color: #555;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .faculty-specialization {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        /* Labs Section */
+        .labs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .lab-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .lab-img {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--dark-navy) 100%);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .lab-content {
+            padding: 25px;
+        }
+
+        .lab-content h4 {
+            color: var(--navy);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .lab-content p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .lab-equipment h5 {
+            color: var(--burgundy);
+            margin-bottom: 10px;
+        }
+
+        .equipment-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .equipment-list li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .equipment-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        /* Research Section */
+        .research-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .research-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .research-card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .research-card h4 {
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        /* Placement Section */
+        .placement-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--burgundy);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .recruiters {
+            margin-top: 50px;
+        }
+
+        .recruiters h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--navy);
+        }
+
+        .recruiter-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .recruiter-logo {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--navy);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .recruiter-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Events Section */
+        .events-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .event-item {
+            display: flex;
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .event-date {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--dark-navy) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .event-day {
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .event-month {
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .event-content {
+            padding: 25px;
+            flex: 1;
+        }
+
+        .event-content h4 {
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            color:black;
+        }
+
+        .contact-info h3, .contact-form h3 {
+            color: var(--navy);
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            margin-bottom: 25px;
+        }
+
+        .contact-detail i {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-right: 20px;
+            margin-top: 5px;
+        }
+
+        .contact-detail h4 {
+            color: var(--navy);
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--navy);
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--dark-navy) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-department {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .department-hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .event-item {
+                flex-direction: column;
+            }
+            
+            .event-date {
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .department-hero {
+                padding: 100px 0 60px;
+            }
+            
+            .content-section {
+                padding: 60px 0;
+            }
+            
+            .programs-grid, .faculty-grid, .labs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <section class="department-hero">
+        <div class="container department-hero-content">
+            <h1>Information Technology</h1>
+            <p>Empowering the digital future through cutting-edge technology and innovation</p>
+            <div class="department-badge">NAAC Accredited • AICTE Approved</div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="about" class="content-section">
+            <div class="section-title">
+                <h2>About IT Department</h2>
+            </div>
+            <div class="about-department">
+                <div class="about-text">
+                    <p>The Department of Information Technology at GTEC was established with a vision to create IT professionals who can meet the demands of the rapidly evolving technology landscape. Our department focuses on providing a strong foundation in both theoretical concepts and practical applications of information technology.</p>
+                    <p>We offer a comprehensive curriculum that covers areas such as software engineering, database management, networking, cloud computing, cybersecurity, and data analytics. Our state-of-the-art laboratories and experienced faculty ensure that students receive hands-on experience with the latest technologies and tools.</p>
+                    <p>The department emphasizes industry collaboration, research, and innovation to prepare students for successful careers in the IT industry. Our graduates are well-equipped to tackle real-world challenges and contribute to the digital transformation of organizations.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="IT Laboratory">
+                </div>
+            </div>
+        </section>
+
+        <section id="programs" class="content-section">
+            <div class="section-title">
+                <h2>Academic Programs</h2>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h4>B.Tech. Information Technology</h4>
+                    <p>4-year undergraduate program focusing on software development, networking, database systems, and emerging IT technologies.</p>
+                    <div class="program-details">
+                        <div class="program-duration">Duration: 4 Years</div>
+                        <div class="program-intake">Intake: 120 Students</div>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <h4>M.Tech. Information Technology</h4>
+                    <p>2-year postgraduate program with specialization in advanced IT concepts, research methodologies, and emerging technologies.</p>
+                    <div class="program-details">
+                        <div class="program-duration">Duration: 2 Years</div>
+                        <div class="program-intake">Intake: 18 Students</div>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <h4>Ph.D. in Information Technology</h4>
+                    <p>Research program focusing on cutting-edge technologies and innovations in the field of information technology.</p>
+                    <div class="program-details">
+                        <div class="program-duration">Duration: 3-5 Years</div>
+                        <div class="program-intake">Full-time & Part-time</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faculty" class="content-section">
+            <div class="section-title">
+                <h2>Our Faculty</h2>
+            </div>
+            <div class="faculty-grid">
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="faculty-content">
+                        <h4>Mr. D. Durai Kumar</h4>
+                        <div class="faculty-designation">Associate Professor & HOD</div>
+                        <div class="faculty-qualification">M.Tech.</div>
+                        <div class="faculty-specialization">Information Technology</div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="faculty-content">
+                        <h4>Mr. V. P. Manikandan</h4>
+                        <div class="faculty-designation">Assistant Professor</div>
+                        <div class="faculty-qualification">M.Tech.</div>
+                        <div class="faculty-specialization">Information Technology</div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="faculty-content">
+                        <h4>Mr. S. Balaji</h4>
+                        <div class="faculty-designation">Assistant Professor</div>
+                        <div class="faculty-qualification">M.Tech.</div>
+                        <div class="faculty-specialization">Information Technology</div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="faculty-content">
+                        <h4>Mrs. S. Priya</h4>
+                        <div class="faculty-designation">Assistant Professor</div>
+                        <div class="faculty-qualification">M.Tech.</div>
+                        <div class="faculty-specialization">Information Technology</div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="faculty-content">
+                        <h4>Mr. B. Anbazhagan</h4>
+                        <div class="faculty-designation">Assistant Professor</div>
+                        <div class="faculty-qualification">M.E.</div>
+                        <div class="faculty-specialization">Information Technology</div>
+                    </div>
+                </div>
+               <div class="faculty-card">
+                    <div class="faculty-img">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="faculty-content">
+                        <h4>Ms. R. Sathiyapriya</h4>
+                        <div class="faculty-designation">Assistant Professor</div>
+                        <div class="faculty-qualification">M.Tech.</div>
+                        <div class="faculty-specialization">Information Technology</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="labs" class="content-section">
+            <div class="section-title">
+                <h2>Laboratories & Facilities</h2>
+            </div>
+            <div class="labs-grid">
+                <div class="lab-card">
+                    <div class="lab-img">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="lab-content">
+                        <h4>RDBMS Laboratory</h4>
+                        <p>Comprehensive facility for learning and practicing database management concepts using modern RDBMS technologies.</p>
+                        <div class="lab-equipment">
+                            <h5>Key Equipment:</h5>
+                            <ul class="equipment-list">
+                                <li>Oracle Database Servers</li>
+                                <li>MySQL Workbench</li>
+                                <li>PostgreSQL Systems</li>
+                                <li>SQL Server Management Studio</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lab-card">
+                    <div class="lab-img">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="lab-content">
+                        <h4>OOPS and Data Structure Laboratory</h4>
+                        <p>Hands-on facility for learning object-oriented programming concepts and implementing various data structures.</p>
+                        <div class="lab-equipment">
+                            <h5>Key Equipment:</h5>
+                            <ul class="equipment-list">
+                                <li>Java Development Kits</li>
+                                <li>C++ Compilers</li>
+                                <li>Python IDEs</li>
+                                <li>Algorithm Visualization Tools</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lab-card">
+                    <div class="lab-img">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="lab-content">
+                        <h4>Software Development Laboratory</h4>
+                        <p>State-of-the-art facility for software engineering practices, development methodologies, and project implementation.</p>
+                        <div class="lab-equipment">
+                            <h5>Key Equipment:</h5>
+                            <ul class="equipment-list">
+                                <li>Visual Studio & Eclipse</li>
+                                <li>Git Version Control Systems</li>
+                                <li>Agile Project Management Tools</li>
+                                <li>Testing Frameworks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lab-card">
+                    <div class="lab-img">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="lab-content">
+                        <h4>Networking Laboratory</h4>
+                        <p>Comprehensive lab for studying computer networks, protocols, and network security with practical implementation.</p>
+                        <div class="lab-equipment">
+                            <h5>Key Equipment:</h5>
+                            <ul class="equipment-list">
+                                <li>Cisco Routers & Switches</li>
+                                <li>Network Simulators</li>
+                                <li>Protocol Analyzers</li>
+                                <li>Wireless Networking Equipment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lab-card">
+                    <div class="lab-img">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="lab-content">
+                        <h4>Cloud Computing Laboratory</h4>
+                        <p>Advanced facility for learning cloud computing concepts, virtualization, and deployment of cloud-based applications.</p>
+                        <div class="lab-equipment">
+                            <h5>Key Equipment:</h5>
+                            <ul class="equipment-list">
+                                <li>AWS/Azure Cloud Platforms</li>
+                                <li>Virtualization Software</li>
+                                <li>Containerization Tools</li>
+                                <li>Cloud Management Consoles</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="content-section">
+            <div class="section-title">
+                <h2>Research & Development</h2>
+            </div>
+            <p>The IT department is actively involved in cutting-edge research in various domains. Our faculty and students collaborate with industry and research organizations to solve real-world problems.</p>
+            
+            <div class="research-areas">
+                <div class="research-card">
+                    <i class="fas fa-brain"></i>
+                    <h4>Artificial Intelligence</h4>
+                    <p>Research on machine learning, natural language processing, and AI applications</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Cybersecurity</h4>
+                    <p>Developing secure systems and protocols for digital protection</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-cloud"></i>
+                    <h4>Cloud Computing</h4>
+                    <p>Innovations in cloud infrastructure, services, and deployment models</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h4>Data Analytics</h4>
+                    <p>Big data processing, visualization, and predictive analytics</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="placement" class="content-section">
+            <div class="section-title">
+                <h2>Placements & Internships</h2>
+            </div>
+            <p>Our IT students have an excellent track record of placements in top companies. The department provides comprehensive training and guidance to prepare students for successful careers.</p>
+            
+            <div class="placement-stats">
+                <div class="stat-card">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Placement Rate</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">7.2 LPA</span>
+                    <span class="stat-label">Average Package</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">22 LPA</span>
+                    <span class="stat-label">Highest Package</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">60+</span>
+                    <span class="stat-label">Companies Visited</span>
+                </div>
+            </div>
+            
+            <div class="recruiters">
+                <h3>Our Top Recruiters</h3>
+                <div class="recruiter-logos">
+                    <div class="recruiter-logo">TCS</div>
+                    <div class="recruiter-logo">Infosys</div>
+                    <div class="recruiter-logo">Wipro</div>
+                    <div class="recruiter-logo">Accenture</div>
+                    <div class="recruiter-logo">Cognizant</div>
+                    <div class="recruiter-logo">HCL</div>
+                    <div class="recruiter-logo">Amazon</div>
+                    <div class="recruiter-logo">Microsoft</div>
+                </div>
+            </div>
+        </section>
+<section id="events" class="content-section">
+            <div class="section-title">
+                <h2>Department Events</h2>
+            </div>
+            <div class="events-timeline">
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">20</div>
+                        <div class="event-month">MAR 2025</div>
+                    </div>
+                    <div class="event-content">
+                        <h4>National Conference on Emerging Technologies</h4>
+                        <p>Annual technical conference featuring research papers, keynote speeches, and workshops on emerging IT technologies.</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">15</div>
+                        <div class="event-month">APR 2025</div>
+                    </div>
+                    <div class="event-content">
+                        <h4>Hackathon 2025</h4>
+                        <p>48-hour coding competition where students develop innovative solutions to real-world problems.</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">05</div>
+                        <div class="event-month">MAY 2025</div>
+                    </div>
+                    <div class="event-content">
+                        <h4>Industry-Academia Meet</h4>
+                        <p>Interactive session with professionals from leading IT companies to discuss industry trends and career opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <div class="section-title">
+                <h2>Contact IT Department</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>Department of IT, GTEC Campus<br>Chittoor-Cuddalore Road, Kaniyambadi<br>Vellore - 632 102, Tamil Nadu</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 416 - 2230 900</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>it.department@gtec.ac.in</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Department Hours</h4>
+                            <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form id="itContactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="admission">Admission Inquiry</option>
+                                <option value="research">Research Collaboration</option>
+                                <option value="industry">Industry Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> GTEC Campus, Chittoor - 517127, Andhra Pradesh</p>
+                    <p><i class="fas fa-phone"></i> +91 8572 123456</p>
+                    <p><i class="fas fa-envelope"></i> info@gtec.ac.in</p>
+                    <p><i class="fas fa-globe"></i> www.gtec.ac.in</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="index.html#about">About GTEC</a>
+                    <a href="index.html#programs">Academic Programs</a>
+                    <a href="index.html#departments">Departments</a>
+                    <a href="index.html#facilities">Facilities</a>
+                    <a href="index.html#placement">Placements</a>
+                </div>
+                <div class="footer-section">
+                    <h3>IT Department</h3>
+                    <a href="#about">About IT</a>
+                    <a href="#programs">Programs</a>
+                    <a href="#faculty">Faculty</a>
+                    <a href="#labs">Laboratories</a>
+                    <a href="#research">Research</a>
+                    <a href="#placement">Placements</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© All Copyrights GTEC Reserved 2025. Department of Information Technology</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script src="menujs.js"></script>
+    <script>
+        // Form submission handling
+        document.getElementById('itContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
